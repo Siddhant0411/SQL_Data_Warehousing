@@ -12,19 +12,19 @@ Usage Example:
     EXEC bronze.load_bronze;
 ===============================================================================
 */
-
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @starttime DATETIME,@endtime DATETIME;
 	BEGIN TRY
 		PRINT '================================================';
-		PRINT 'Loading Bronze Layer';
+		PRINT '              Loading Bronze Layer';
 		PRINT '================================================';
-
+		PRINT ' ';
 		PRINT '------------------------------------------------';
-		PRINT 'Loading CRM Tables';
+		PRINT '              Loading CRM Tables';
 		PRINT '------------------------------------------------';
 
+		PRINT '             LOADING crm.cust_info';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_cust_info;
 		BULK INSERT bronze.crm_cust_info 
@@ -35,9 +35,10 @@ BEGIN
 			TABLOCK
 		);
 		SET @endtime = GETDATE();
-		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT 'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
+		PRINT '------------------------------------------------';
 
+		PRINT '              LOADING crm.prd_info';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_prd_info;
 		BULK INSERT bronze.crm_prd_info 
@@ -49,8 +50,9 @@ BEGIN
 		);
 		SET @endtime = GETDATE();
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT '------------------------------------------------';
 
+		PRINT '          LOADING crm.sales_details';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_sales_details;
 		BULK INSERT bronze.crm_sales_details 
@@ -62,12 +64,13 @@ BEGIN
 		);
 		SET @endtime = GETDATE();
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT'------------------------------------------------';
 
 		PRINT '------------------------------------------------';
 		PRINT 'Loading ERP Tables';
 		PRINT '------------------------------------------------';
 
+		PRINT '            LOADING erp.cust_az12';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_cust_az12;
 		BULK INSERT bronze.erp_cust_az12 
@@ -78,9 +81,10 @@ BEGIN
 			TABLOCK
 		);
 		SET @endtime = GETDATE();
-		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT 'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
+		PRINT '------------------------------------------------';
 
+		PRINT '            LOADING erp.loc_a101';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_loc_a101;
 		BULK INSERT bronze.erp_loc_a101
@@ -92,8 +96,9 @@ BEGIN
 		);
 		SET @endtime = GETDATE();
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT'------------------------------------------------';
 
+		PRINT '            LOADING erp.px_cat_g1v2';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_px_cat_g1v2;
 		BULK INSERT bronze.erp_px_cat_g1v2 
@@ -105,7 +110,7 @@ BEGIN
 		);
 		SET @endtime = GETDATE();
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
-		PRINT'-----------------------------------------------------------------------------------';
+		PRINT'------------------------------------------------';
 	END TRY
 	BEGIN CATCH
 		PRINT '=========================================='
