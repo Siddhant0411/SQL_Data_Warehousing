@@ -14,8 +14,9 @@ Usage Example:
 */
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
-	DECLARE @starttime DATETIME,@endtime DATETIME;
+	DECLARE @starttime DATETIME,@endtime DATETIME,@batchstart DATETIME,@batchend DATETIME;
 	BEGIN TRY
+		SET @batchstart = GETDATE();
 		PRINT '================================================';
 		PRINT '              Loading Bronze Layer';
 		PRINT '================================================';
@@ -111,6 +112,10 @@ BEGIN
 		SET @endtime = GETDATE();
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
 		PRINT'------------------------------------------------';
+		
+		SET @batchend = GETDATE();
+		PRINT '';
+		PRINT 'BATCH LOAD DURATION: ' + CAST(DATEDIFF(second,@batchstart,@batchend) as NVARCHAR) + ' seconds';
 	END TRY
 	BEGIN CATCH
 		PRINT '=========================================='
