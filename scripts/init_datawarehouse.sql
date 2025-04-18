@@ -7,7 +7,7 @@ This script creates a new database named 'DataWarehouse' after checking if it al
 */
 IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'data_warehouse')
 BEGIN
-	ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE data_warehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 	DROP DATABASE data_warehouse;
 END;
 
