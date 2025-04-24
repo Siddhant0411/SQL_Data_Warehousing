@@ -25,7 +25,7 @@ BEGIN
 		PRINT '              Loading CRM Tables';
 		PRINT '------------------------------------------------';
 
-		PRINT '             LOADING crm.cust_info';
+		PRINT '             LOADING bronze.crm_cust_info';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_cust_info;
 		BULK INSERT bronze.crm_cust_info 
@@ -39,7 +39,7 @@ BEGIN
 		PRINT 'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
 		PRINT '------------------------------------------------';
 
-		PRINT '              LOADING crm.prd_info';
+		PRINT '              LOADING bronze.crm_prd_info';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_prd_info;
 		BULK INSERT bronze.crm_prd_info 
@@ -53,7 +53,7 @@ BEGIN
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
 		PRINT '------------------------------------------------';
 
-		PRINT '          LOADING crm.sales_details';
+		PRINT '          LOADING bronze.crm_sales_details';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.crm_sales_details;
 		BULK INSERT bronze.crm_sales_details 
@@ -71,7 +71,7 @@ BEGIN
 		PRINT 'Loading ERP Tables';
 		PRINT '------------------------------------------------';
 
-		PRINT '            LOADING erp.cust_az12';
+		PRINT '            LOADING bronze.erp_cust_az12';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_cust_az12;
 		BULK INSERT bronze.erp_cust_az12 
@@ -85,7 +85,7 @@ BEGIN
 		PRINT 'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
 		PRINT '------------------------------------------------';
 
-		PRINT '            LOADING erp.loc_a101';
+		PRINT '            LOADING bronze.erp_loc_a101';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_loc_a101;
 		BULK INSERT bronze.erp_loc_a101
@@ -99,7 +99,7 @@ BEGIN
 		PRINT'LOAD DURATION: ' + CAST(DATEDIFF(second,@starttime,@endtime) as NVARCHAR) + ' seconds';
 		PRINT'------------------------------------------------';
 
-		PRINT '            LOADING erp.px_cat_g1v2';
+		PRINT '            LOADING bronze.erp_px_cat_g1v2';
 		SET @starttime = GETDATE();
 		TRUNCATE TABLE bronze.erp_px_cat_g1v2;
 		BULK INSERT bronze.erp_px_cat_g1v2 
